@@ -127,6 +127,8 @@ button {
   cursor: pointer;
 }
 
+
+
 /* Mobile overrides */
 @media(max-width:780px) {
 #logo-bar {
@@ -476,36 +478,41 @@ textarea {
   animation-name: fadeOut;
 }
 
+/*#ascii-canvas {background-color:white;color:black;}*/ /* ez edit */
+#ascii-canvas {background-color:#202020;color:#ccc;} /* ez edit */
+body, #draw-tools, #draw-tools > button, #file-tools > button {background-color:#2f2f2f;color:#ccc;}
+#draw-tools {-webkit-box-shadow: 0px 1px 5px 0px #222;}
 </style>
 </head>
 <body>
 
-<div id="logo-interstitial" class="animated fadeOut">
-  <img src="images/logo-full.gif" class="animated bounceOut" />
+<div id="logo-interstitial" class="animated fadeOut" style="display:flex;justify-content:center;align-items:center">
+  <!--<img src="images/logo-full.gif" class="animated bounceOut" />-->
+  <div class="animated bounceOut" style="font-weight:normal">loading...</div>
 </div>
 
-<img id="logo-bar" src="images/logo-bar.gif" width="88" height="24" />
+<!--<img id="logo-bar" src="images/logo-bar.gif" width="88" height="24" />--><div id="logo-bar" style="padding-top:4px;font-weight:normal">asciiflow</div>
 
 <div id="draw-tools">
-  <button id="box-button" class="tool active box-image" title="Draw boxes"></button>
-  <button id="line-button" class="tool line-image" title="Draw connecting lines"></button>
-  <button id="arrow-button" class="tool arrow-image" title="Draw arrows"></button>
-  <button id="freeform-button" class="tool freeform-image" title="Freeform drawing"></button>
-  <button id="erase-button" class="tool erase-image" title="Erase square areas"></button>
-  <button id="move-button" class="tool move-image" title="Resize/move boxes and lines"></button>
-  <button id="text-button" class="tool text-image" title="Text tool"></button>
-  <button id="select-button" class="tool select-image" title="Select, copy, cut and move"></button>
+  <button id="box-button" class="tool active box-image" title="Draw boxes">[]</button>
+  <button id="line-button" class="tool line-image" title="Draw connecting lines">---</button>
+  <button id="arrow-button" class="tool arrow-image" title="Draw arrows">-&gt;</button>
+  <button id="freeform-button" class="tool freeform-image" title="Freeform drawing" style="font-size:large">&#x270e;</button>
+  <button id="erase-button" class="tool erase-image" title="Erase square areas" style="font-size:large">&#x2704;</button>
+  <button id="move-button" class="tool move-image" title="Resize/move boxes and lines" style="font-size:large">&#x2921;</button>
+  <button id="text-button" class="tool text-image" title="Text tool" style="font-weight:normal">Abc</button>
+  <button id="select-button" class="tool select-image" title="Select, copy, cut and move" style="font-size:large">&#x2B1A;</button>
 </div>
 
 <div id="file-tools">
-  <div id="drive-save-state">Unsaved</div>
-  <button id="drive-button" class="tool drive-image" title="Google Drive Saving"></button>
-  <button id="export-button" class="tool export-image" title="Export"></button>
-  <button id="import-button" class="tool import-image" title="Import"></button>
-  <button id="clear-button" class="tool clear-image" title="Clear"></button>
-  <button id="undo-button" class="tool undo-image" title="Undo"></button>
-  <button id="redo-button" class="tool redo-image" title="Redo"></button>
-  <button id="options-button" class="tool info-image" title="Info"></button>
+  <div id="drive-save-state" style="display:none">Unsaved</div>
+  <!--<button id="drive-button" class="tool drive-image" title="Google Drive Saving">G</button>-->
+  <button id="export-button" class="tool export-image" title="Export" style="font-size:110%;font-weight:normal">&#x2398;</button>
+  <button id="import-button" class="tool import-image" title="Import" style="font-size:large;font-weight:normal">&#x21EA;</button>
+  <button id="clear-button" class="tool clear-image" title="Clear" style="font-size:large;font-weight:normal">&#x2716;</button>
+  <button id="undo-button" class="tool undo-image" title="Undo" style="font-size:large;font-weight:normal">&#x27F2;</button>
+  <button id="redo-button" class="tool redo-image" title="Redo" style="font-size:large;font-weight:normal">&#x27F3;</button>
+  <button id="options-button" class="tool info-image" title="Info" style="font-size:large">&#x2139;</button>
 </div>
 
 
@@ -518,7 +525,7 @@ textarea {
 
 <div id="options-button-dialog" class="dialog">
   <div id="options-scroll">
-      <img id="options-logo" src="images/logo-options.gif" width="176" height="48" />
+      <!--<img id="options-logo" src="images/logo-options.gif" width="176" height="48" />--><div id="options-logo" style="font-size:xx-large">asciiflow</div>
         <br>
         <button id="use-lines-button">Lines Mode</button>
         <button id="use-ascii-button">ASCII Mode</button><br>
@@ -590,31 +597,8 @@ textarea {
 
 <script src="jquery-3.1.1.min.js"></script>
 <script src="js-compiled.js"></script>
-<script src="https://apis.google.com/js/client.js?onload=window.gapiCallback"></script>
 
-<script type="text/javascript">
-var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-if (width > 750) {
-  window._tpm = window._tpm || [];
-  window._tpm['paywallID'] = '37774341';
-  window._tpm['trackPageview'] = true;
-}
-</script>
-<script type="text/javascript" src="https://code.tinypass.com/tpl/d1/tpm.js"></script>
 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','analytics');
-
-  analytics('create', 'UA-49427709-1', 'asciiflow.com');
-  analytics('send', 'pageview');
-
-</script>
-
-<link rel="stylesheet" type="text/css" href="addtohomescreen.css">
-<script src="addtohomescreen.min.js"></script>
 
 <script>
 window.setTimeout(function() { $('#logo-interstitial').hide(); }, 3000);
@@ -625,3 +609,4 @@ addToHomescreen({
 
 </body>
 </html>
+

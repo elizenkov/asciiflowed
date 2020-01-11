@@ -347,7 +347,7 @@ function ua(a) {
   c.y = Math.max(0, Math.min(c.y, 600));
   e.y = Math.max(0, Math.min(e.y, 600));
   b.lineWidth = "1";
-  b.strokeStyle = "#EEEEEE";
+  b.strokeStyle = "#5A5A5A";
   b.beginPath();
   for (var d = c.x;d < e.x;d++) {
     b.moveTo(9 * d - a.a.x, 0 - a.a.y), b.lineTo(9 * d - a.a.x, 17 * a.g.a.length - a.a.y);
@@ -362,10 +362,10 @@ function ua(a) {
     for (var k = c.y;k < e.y;k++) {
       var l = R(a.g, new p(f, k));
       if (K(l) || null != l.a && " " != J(l)) {
-        a.context.fillStyle = null != l.a ? "#DEF" : "#F5F5F5", b.fillRect(9 * f - a.a.x, 17 * (k - 1) - a.a.y, 9, 17);
+        a.context.fillStyle = null != l.a ? "#6d6b63" : "#404040", b.fillRect(9 * f - a.a.x, 17 * (k - 1) - a.a.y, 9, 17);
       }
       var A = na(a.g, new p(f, k));
-      null == A || K(l) && !d || (a.context.fillStyle = "#000000", b.fillText(A, 9 * f - a.a.x, 17 * k - a.a.y - 3));
+      null == A || K(l) && !d || (a.context.fillStyle = "#ccc", b.fillText(A, 9 * f - a.a.x, 17 * k - a.a.y - 3));
     }
   }
   if (a.h) {
@@ -989,4 +989,5 @@ new function(a, b) {
   });
 }(Va, Wa);
 ta(Wa);
+
 
