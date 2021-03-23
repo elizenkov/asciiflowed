@@ -1,3 +1,61 @@
+var afColor1, afColor2, afColor3, afColor4, afColor5, saveglobal;
+var afColor1l="#EEEEEE", afColor1d="#5A5A5A", /* grid */
+ afColor2l="#DEF", afColor2d="#6d6b63",       /* active highlight */
+ afColor3l="#F5F5F5", afColor3d="#404040",    /* box highlight */
+ afColor4l="#000000", afColor4d="#CCC",       /* symbols */
+ afColor5l="#000000", afColor5d="#CCC";       /* lines in line mode */
+
+
+/*
+var colorSchemeQueryList = window.matchMedia('(prefers-color-scheme: dark)');
+
+function setColorScheme(e) {
+  if (e.matches) {
+    // Dark
+    console.log('Dark mode');
+  } else {
+    // Light
+    console.log('Light mode');
+  }
+
+setColorScheme(colorSchemeQueryList);
+colorSchemeQueryList.addListener(setColorScheme);
+ */
+
+if (window.matchMedia('(prefers-color-scheme: dark)').media === 'not all') { /* light mode */ }
+
+var afDarkOut;
+function isItDarkOut(initStartup = false, forcedState = null){ // Set interval for checking
+    //var date = new Date(); // Create a Date object to find out what time it is
+    //if((forcedState==true&&forcedState!==null)||(date.getHours() <= 7)||(date.getHours() >= 19 && date.getMinutes() >= 00)){ // Check the time
+    if ((forcedState === null && window.matchMedia('(prefers-color-scheme: dark)').matches)||(forcedState==true&&forcedState!==null)){
+        afDarkOut = true;
+    } else {
+        afDarkOut = false;
+    }
+    if (afDarkOut) {
+        afColor1 = afColor1d;
+        afColor2 = afColor2d;
+        afColor3 = afColor3d;
+        afColor4 = afColor4d;
+        afColor5 = afColor5d;
+        $("body").addClass("dark");
+    } else {
+        afColor1 = afColor1l;
+        afColor2 = afColor2l;
+        afColor3 = afColor3l;
+        afColor4 = afColor4l;
+        afColor5 = afColor5l;
+        $("body").removeClass("dark");
+    }
+    if (!initStartup) { sa(saveglobal); } /* apply refresh */
+}
+isItDarkOut(true); /* initial set */
+//window.setInterval(isItDarkOut, 1000);
+//window.setInterval(isItDarkOut, 60000);
+/* ez mod for timed dark mode */
+
+
 var g, aa = "function" == typeof Object.defineProperties ? Object.defineProperty : function(a, b, c) {
   if (c.get || c.set) {
     throw new TypeError("ES3 does not support getters and setters.");
@@ -336,6 +394,7 @@ function ta(a) {
   });
 }
 function ua(a) {
+  saveglobal = a;
   var b = a.context;
   b.setTransform(1, 0, 0, 1, 0, 0);
   b.clearRect(0, 0, a.b.width, a.b.height);
@@ -347,7 +406,7 @@ function ua(a) {
   c.y = Math.max(0, Math.min(c.y, 600));
   e.y = Math.max(0, Math.min(e.y, 600));
   b.lineWidth = "1";
-  b.strokeStyle = "#5A5A5A";
+  b.strokeStyle = afColor1;
   b.beginPath();
   for (var d = c.x;d < e.x;d++) {
     b.moveTo(9 * d - a.a.x, 0 - a.a.y), b.lineTo(9 * d - a.a.x, 17 * a.g.a.length - a.a.y);
@@ -362,15 +421,15 @@ function ua(a) {
     for (var k = c.y;k < e.y;k++) {
       var l = R(a.g, new p(f, k));
       if (K(l) || null != l.a && " " != J(l)) {
-        a.context.fillStyle = null != l.a ? "#6d6b63" : "#404040", b.fillRect(9 * f - a.a.x, 17 * (k - 1) - a.a.y, 9, 17);
+        a.context.fillStyle = null != l.a ? afColor2 : afColor3, b.fillRect(9 * f - a.a.x, 17 * (k - 1) - a.a.y, 9, 17);
       }
       var A = na(a.g, new p(f, k));
-      null == A || K(l) && !d || (a.context.fillStyle = "#ccc", b.fillText(A, 9 * f - a.a.x, 17 * k - a.a.y - 3));
+      null == A || K(l) && !d || (a.context.fillStyle = afColor4, b.fillText(A, 9 * f - a.a.x, 17 * k - a.a.y - 3));
     }
   }
   if (a.h) {
     b.lineWidth = "1";
-    b.strokeStyle = "#000000";
+    b.strokeStyle = afColor5;
     b.beginPath();
     for (d = c.x;d < e.x;d++) {
       for (l = !1, f = c.y;f < e.y;f++) {
@@ -711,6 +770,14 @@ function Fa(a) {
     var b = a.a;
     b.h = !1;
     b.f = !0;
+  });
+  $("#dark-mode-button").click(function() {
+    isItDarkOut(false,true);
+    //$(".dialog").removeClass("visible");
+  });
+  $("#light-mode-button").click(function() {
+    isItDarkOut(false,false);
+    //$(".dialog").removeClass("visible");
   });
   $(window).keypress(function(b) {
     b.ctrlKey || b.metaKey || 13 == b.keyCode || a.c.j(String.fromCharCode(b.keyCode));

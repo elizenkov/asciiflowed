@@ -2,12 +2,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="Description" content="Infinite ASCII diagrams, save to Google Drive, resize, freeform draw, and export straight to text/html.">
+<meta name="Description" content="Infinite ASCII diagrams, in a single file: resize, freeform draw, and export straight to text/html.">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="mobile-web-app-capable" content="yes" />
-<link rel="shortcut icon" sizes="196x196" href="images/favicon.png">
-<title>ASCIIFlow Infinity</title>
+<!--<link rel="shortcut icon" sizes="196x196" href="images/favicon.png">-->
+<title>asciiflowed</title>
 <style>
 
 * {
@@ -16,6 +16,13 @@
   font-size: 0.95em;
   color: #666;
 }
+
+/* begin mod */
+body.dark * {
+  color: #CCC;
+}
+.info-icon, .info-icon-file {position: relative; top: -13px;}
+/* end mod */
 
 a {
   color: #FF9E20;
@@ -52,6 +59,10 @@ button {
   left: 0px;
   z-index: 101;
   margin: 8px;
+}
+
+body.dark #logo-bar {
+  color: #666;
 }
 
 #file-tools {
@@ -106,6 +117,10 @@ button {
   color: #AAA;
 }
 
+body.dark .dialog span {
+  color: #666;
+}
+
 #drive-filename {
   display: inline-block;
 }
@@ -156,6 +171,8 @@ button {
           box-shadow: 0px -1px 5px 0px #BBB; /* Chrome 6+, Firefox 4+, IE 9+, iOS 5+, Opera 10.50+ */
 }
 
+body.dark #file-tools {-webkit-box-shadow: 0px -1px 5px 0px #222; box-shadow: 0px -1px 5px 0px #222;}
+
 #drive-save-state {
   line-height: 44px;
   margin-right: 6px;
@@ -169,6 +186,8 @@ button {
 #drive-filename {
   display: block;
 }
+
+.info-icon, .info-icon-file {position: relative; top: 0px;} /* mod */
 }
 
 .dialog {
@@ -309,6 +328,13 @@ textarea {
   pointer-events: none;
 }
 
+/* begin mod */
+@media (prefers-color-scheme: dark) {
+  #logo-interstitial {background-color:#202020}
+}
+/* end mod */
+
+/*
 #logo-interstitial > img {
   display: inline;
   max-width: 100%;
@@ -319,7 +345,7 @@ textarea {
   left: 0;
   right: 0;
   margin: auto;
-}
+}*/
 
 #text-tool-widget {
   display: none;
@@ -338,7 +364,7 @@ textarea {
 .fade-out {
   opacity: 0;
 }
-
+/*
 .box-image { background-image: url('images/box-icon.gif'); }
 .line-image { background-image: url('images/line-icon.gif'); }
 .arrow-image { background-image: url('images/arrow-icon.gif'); }
@@ -356,7 +382,7 @@ textarea {
 .select-image { background-image: url('images/select-icon.gif'); }
 
 .info-image { background-image: url('images/info-icon.gif'); }
-
+*/
 /* New intro animation */
 
 .animated {
@@ -478,10 +504,43 @@ textarea {
   animation-name: fadeOut;
 }
 
-/*#ascii-canvas {background-color:white;color:black;}*/ /* ez edit */
-#ascii-canvas {background-color:#202020;color:#ccc;} /* ez edit */
-body, #draw-tools, #draw-tools > button, #file-tools > button {background-color:#2f2f2f;color:#ccc;}
-#draw-tools {-webkit-box-shadow: 0px 1px 5px 0px #222;}
+#ascii-canvas {background-color:white;color:black;} /* ez edit */
+
+body.dark #ascii-canvas {background-color:#202020;color:#ccc;}
+body.dark, body.dark #draw-tools, body.dark #file-tools, body.dark #draw-tools > button, body.dark #file-tools > button {background-color:#2f2f2f;color:#ccc;}
+body.dark #draw-tools button.active {
+  color: #BAB49C;
+  -webkit-text-shadow: 0 0 6px #BAB49C; text-shadow: 0 0 6px #BAB49C;
+}
+body.dark #draw-tools {-webkit-box-shadow: 0px 1px 5px 0px #222; box-shadow: 0px 1px 5px 0px #222;}
+body.dark .dialog, .text-tool-widget {background-color:#202020;
+  -webkit-box-shadow: 0px 0px 5px 0px #222; box-shadow: 0px 0px 5px 0px #222;
+}
+body.dark .dialog-button-bar {background-color:#5A5A5A}
+body.dark textarea, body.dark .text-tool-widget {background-color:#202020;}
+body.dark textarea::selection {color:#ccc; background-color:#6d6b63;}
+
+#use-lines-button, #use-ascii-button, #dark-mode-button, #light-mode-button
+  {border-width:1px; border-radius:5px; padding-top:3px;padding-bottom:3px;padding-left:8px;padding-right:8px }
+body.dark #use-lines-button, body.dark #use-ascii-button, body.dark #dark-mode-button, body.dark #light-mode-button
+  {background-color:#202020;border:2px #CCC; border-style:solid; border-radius:5px; padding-top:2px;padding-bottom:2px;padding-left:7px;padding-right:7px }
+body.dark #use-lines-button:hover, body.dark #use-ascii-button:hover, body.dark #dark-mode-button:hover, body.dark #light-mode-button:hover
+  {background-color:#353535}
+
+#dark-mode-button {display:inline-block}
+#light-mode-button {display:none}
+body.dark #dark-mode-button {display:none}
+body.dark #light-mode-button {display:inline-block}
+
+body.dark #options-scroll::-webkit-scrollbar-track {background-color:#CCC;}
+body.dark #options-scroll::-webkit-scrollbar-thumb {background-color:#5A5A5A;}
+
+
+body.dark #options-scroll {scrollbar-color: #CCC #5A5A5A;}
+
+body.dark #logo-interstitial {background-color:#202020}
+
+
 </style>
 </head>
 <body>
@@ -491,7 +550,7 @@ body, #draw-tools, #draw-tools > button, #file-tools > button {background-color:
   <div class="animated bounceOut" style="font-weight:normal">loading...</div>
 </div>
 
-<!--<img id="logo-bar" src="images/logo-bar.gif" width="88" height="24" />--><div id="logo-bar" style="padding-top:4px;font-weight:normal">asciiflow</div>
+<!--<img id="logo-bar" src="images/logo-bar.gif" width="88" height="24" />--><div id="logo-bar" style="padding-top:4px;font-weight:normal">asciiflowed</div>
 
 <div id="draw-tools">
   <button id="box-button" class="tool active box-image" title="Draw boxes">[]</button>
@@ -499,13 +558,13 @@ body, #draw-tools, #draw-tools > button, #file-tools > button {background-color:
   <button id="arrow-button" class="tool arrow-image" title="Draw arrows">-&gt;</button>
   <button id="freeform-button" class="tool freeform-image" title="Freeform drawing" style="font-size:large">&#x270e;</button>
   <button id="erase-button" class="tool erase-image" title="Erase square areas" style="font-size:large">&#x2704;</button>
-  <button id="move-button" class="tool move-image" title="Resize/move boxes and lines" style="font-size:large">&#x2921;</button>
-  <button id="text-button" class="tool text-image" title="Text tool" style="font-weight:normal">Abc</button>
-  <button id="select-button" class="tool select-image" title="Select, copy, cut and move" style="font-size:large">&#x2B1A;</button>
+  <button id="move-button" class="tool move-image" title="Resize/move boxes and lines" style="font-size:large;padding-bottom:1px">&#x2921;</button>
+  <button id="text-button" class="tool text-image" title="Text tool" style="font-weight:normal;padding-top:1px">Abc</button>
+  <button id="select-button" class="tool select-image" title="Select, copy, cut and move" style="font-size:large;padding-bottom:4.5px">&#x2B1A;</button>
 </div>
 
 <div id="file-tools">
-  <div id="drive-save-state" style="display:none">Unsaved</div>
+  <!--<div id="drive-save-state" style="display:none">Unsaved</div>-->
   <!--<button id="drive-button" class="tool drive-image" title="Google Drive Saving">G</button>-->
   <button id="export-button" class="tool export-image" title="Export" style="font-size:110%;font-weight:normal">&#x2398;</button>
   <button id="import-button" class="tool import-image" title="Import" style="font-size:large;font-weight:normal">&#x21EA;</button>
@@ -525,7 +584,14 @@ body, #draw-tools, #draw-tools > button, #file-tools > button {background-color:
 
 <div id="options-button-dialog" class="dialog">
   <div id="options-scroll">
-      <!--<img id="options-logo" src="images/logo-options.gif" width="176" height="48" />--><div id="options-logo" style="font-size:xx-large">asciiflow</div>
+      <!--<img id="options-logo" src="images/logo-options.gif" width="176" height="48" />--><div id="options-logo" style="font-size:xx-large">asciiflowed</div>
+        <div style="font-style:italic;font-weight:normal">a mod of asciiflow infinity</div>
+        <br>
+        <div>
+        <button id="dark-mode-button">&#9790;</button>
+        <button id="light-mode-button">&#9788;</button>
+        Change theme
+        </div>
         <br>
         <button id="use-lines-button">Lines Mode</button>
         <button id="use-ascii-button">ASCII Mode</button><br>
@@ -533,25 +599,26 @@ body, #draw-tools, #draw-tools > button, #file-tools > button {background-color:
         Desktop Windows: <span>Hold CTRL and drag the screen.</span><br>
         Desktop OSX: <span>Hold CMD and drag the screen.</span><br>
         Mobile: <span>Drag quickly to move. Press and hold to start drawing. Pinch to zoom in/out.</span></p>
-        <div class="info-icon box-image"></div><div class="info-description">Draw boxes. <span>You can resize them later with the Resize tool.</span></div><br>
-        <div class="info-icon line-image"></div><div class="info-description">Draw lines. <span>Connect it to another line to change the orientation.</span></div><br>
-        <div class="info-icon arrow-image"></div><div class="info-description">Draw arrows. <span>Connect it to another line to change the orientation.</span></div><br>
-        <div class="info-icon freeform-image"></div><div class="info-description">Draw freehand. <span>Press a character on the keyboard and draw with it.</span></div><br>
-        <div class="info-icon erase-image"></div><div class="info-description">Erase. <span>Drag out an area to remove its contents from the canvas.</span></div><br>
-        <div class="info-icon move-image"></div><div class="info-description">Resize boxes and lines. <span>Drag a line to change its size/shape.</span></div><br>
-        <div class="info-icon text-image"></div><div class="info-description">Type text. <span>Click and type where you'd like to add text to the canvas.</span></div><br>
+        <div class="info-icon box-image">[]</div><div class="info-description">Draw boxes. <span>You can resize them later with the Resize tool.</span></div><br>
+        <div class="info-icon line-image">---</div><div class="info-description">Draw lines. <span>Connect it to another line to change the orientation.</span></div><br>
+        <div class="info-icon arrow-image">-&gt;</div><div class="info-description">Draw arrows. <span>Connect it to another line to change the orientation.</span></div><br>
+        <div class="info-icon freeform-image" style="font-size:large">&#x270e;</div><div class="info-description">Draw freehand. <span>Press a character on the keyboard and draw with it.</span></div><br>
+        <div class="info-icon erase-image" style="font-size:large">&#x2704;</div><div class="info-description">Erase. <span>Drag out an area to remove its contents from the canvas.</span></div><br>
+        <div class="info-icon move-image" style="font-size:large">&#x2921;</div><div class="info-description">Resize boxes and lines. <span>Drag a line to change its size/shape.</span></div><br>
+        <div class="info-icon text-image" style="font-weight:normal">Abc</div><div class="info-description">Type text. <span>Click and type where you'd like to add text to the canvas.</span></div><br>
         <br>
-        <div class="info-icon-file drive-image"></div><div class="info-description">Save. <span>Connect to Google Drive to save your work automatically.</span></div><br>
-        <div class="info-icon-file export-image"></div><div class="info-description">Export. <span>Copy your work to use it outside of ASCIIFlow.</span></div><br>
-        <div class="info-icon-file import-image"></div><div class="info-description">Import. <span>Paste ASCII/text to import it onto the canvas.</span></div><br>
-        <div class="info-icon-file clear-image"></div><div class="info-description">Clear. <span>Remove the entire contents from the canvas. Can be undone.</span></div><br>
-        <div class="info-icon-file undo-image"></div><div class="info-description">Undo. <br><span>Made a mistake? Undo!</span></div><br>
-        <div class="info-icon-file redo-image"></div><div class="info-description">Redo. <br><span>Too many Undo's? Redo!</span></div><br>
+        <!--<div class="info-icon-file drive-image"></div><div class="info-description">Save. <span>Connect to Google Drive to save your work automatically.</span></div><br>-->
+        <div class="info-icon-file export-image" style="font-size:110%;font-weight:normal">&#x2398;</div><div class="info-description">Export. <span>Copy your work to use it outside of ASCIIFlow.</span></div><br>
+        <div class="info-icon-file import-image" style="font-size:large;font-weight:normal">&#x21EA;</div><div class="info-description">Import. <span>Paste ASCII/text to import it onto the canvas.</span></div><br>
+        <div class="info-icon-file clear-image" style="font-size:large;font-weight:normal">&#x2716;</div><div class="info-description">Clear. <span>Remove the entire contents from the canvas. Can be undone.</span></div><br>
+        <div class="info-icon-file undo-image" style="font-size:large;font-weight:normal">&#x27F2;</div><div class="info-description">Undo. <br><span>Made a mistake? Undo!</span></div><br>
+        <div class="info-icon-file redo-image" style="font-size:large;font-weight:normal">&#x27F3;</div><div class="info-description">Redo. <br><span>Too many Undo's? Redo!</span></div><br>
         <br>
 
-        <div>File issues as bugs <a href="https://github.com/lewish/asciiflow2/issues" target="_blank">here</a>.</div><br>
+        <!--<div>File issues as bugs <a href="https://github.com/lewish/asciiflow2/issues" target="_blank">here</a>.</div><br>-->
+        <div>Mod changes: <span>Added dark mode, removed tracking, single file application.</span></div><br>
         <div>Return to the original <a href="http://stable.ascii-flow.appspot.com/">ASCIIFlow</a>.</div><br>
-        Developed by <a href="https://plus.google.com/+LewisHemens/about">Lewis</a>, Designed by <a href="mailto:info@samirvine.co.uk">Sam</a> and <a href="mailto:ryangilbanks@gmail.com">Ryan</a>.
+        Developed by <a href="https://plus.google.com/+LewisHemens/about">Lewis</a>, Designed by <a href="mailto:info@samirvine.co.uk">Sam</a> and <a href="mailto:ryangilbanks@gmail.com">Ryan</a>, Modded by <a href="https://elizenkov.com">Eli</a>.
         <br>
         <br>
     </div>
@@ -576,7 +643,7 @@ body, #draw-tools, #draw-tools > button, #file-tools > button {background-color:
     <button id="text-tool-close">Close</button>
   </div>
 </div>
-
+<!--
 <div id="drive-dialog" class="dialog">
   <div id="drive-filename">Untitled ASCII Diagram</div>
   <div style="margin: 5px;">Edit permissions and manage files in <a href="https://drive.google.com/" target="_blank">Google Drive</a>.</div>
@@ -584,13 +651,13 @@ body, #draw-tools, #draw-tools > button, #file-tools > button {background-color:
   <button id="drive-new-file-button">New Drawing</button>
   <br>
   <div id="drive-file-list">
-    <!-- filled with li's -->
+    
   </div>
   <div class="dialog-button-bar">
     <button class="close-dialog-button">Close</button>
   </div>
 </div>
-
+-->
 <textarea id="freeform-tool-input"></textarea>
 
 <canvas id="ascii-canvas"></canvas>
@@ -602,9 +669,6 @@ body, #draw-tools, #draw-tools > button, #file-tools > button {background-color:
 
 <script>
 window.setTimeout(function() { $('#logo-interstitial').hide(); }, 3000);
-addToHomescreen({
-   startDelay: 6
-});
 </script>
 
 </body>
